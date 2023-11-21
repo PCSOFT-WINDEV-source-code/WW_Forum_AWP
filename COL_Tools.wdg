@@ -1,0 +1,302 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_Tools
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x14f5931a09157e36
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAADUFH2+ew8ak0voO3z2QcjRTRDuD1jypI8iEVbPJZpjODueUYyGVKK+nU9retsPLjtZP6KDsHELGOZ+e9WppnCdfQyO5/JYvw==
+  type_code : 31
+  p_codes : []
+  procedures :
+   -
+     name : FormatStringForURL
+     procedure_id : 1510274990083571254
+     type_code : 15
+     code : |1-
+      // Summary: Formats a string for the URL rewriting
+      // Syntax:
+      //[ <Result> = ] FormatStringForURL (<sString> is string)
+      //
+      // Parameters:
+      //	sString (ANSI string): String to format
+      // Return value:
+      // 	ANSI string: The formatted string
+      //
+      PROCEDURE FormatStringForURL(sString is string)
+      
+      sFormattedString is string
+      
+      sFormattedString = NoSpace(NoAccent(sString))
+      sFormattedString = Replace(sFormattedString," ","_")
+      sFormattedString = Replace(sFormattedString,"#","")
+      sFormattedString = Replace(sFormattedString,"-","")
+      sFormattedString = Replace(sFormattedString,"%","")
+      sFormattedString = Replace(sFormattedString,"?","")
+      sFormattedString = Replace(sFormattedString,"&","")
+      
+      sFormattedString = URLEncode(sFormattedString)
+      
+      RESULT sFormattedString
+     type : 458752
+   -
+     name : Ellipsis
+     procedure_id : 1510274990083636790
+     type_code : 15
+     code : |1-
+      // Summary: Ellipses a string
+      // Syntax:
+      //[ <Result> = ] Ellipse (<sString> is string, <nNbCharactersToStore> is int)
+      //
+      // Parameters:
+      //	sString (ANSI string): <specify the role of sString>
+      //	nNbCharactersToStore (integer): <specify the role of nNbCharactersToStore>
+      // Return value:
+      // 	ANSI string: // 	None
+      //
+      // Example:
+      // Indicate an example.
+      //
+      PROCEDURE Ellipsis(LOCAL sString is string, nNbCharactersToStore is int)
+      
+      IF Length(sString) > nNbCharactersToStore THEN
+      	sString = sString [[TO nNbCharactersToStore]] + "..."
+      END
+      
+      RESULT sString
+     type : 458752
+   -
+     name : SMTPSession
+     procedure_id : 1510274990083702326
+     type_code : 15
+     code : |1+
+      // Summary: Configures the sending of emails
+      //
+      PROCEDURE SMTPSession()
+      
+      MySession is an EmailSMTPSession
+      
+      EmailSetTimeOut(10) //Time-out set to 1 min
+      
+      // Use a SMTP server
+      // Configure the session
+      MySession.ServerAddress = LoadPref(SMTP_SERVER_ADDRESS)
+      MySession.Name = LoadPref(SMTP_USER)
+      MySession.Password = LoadPref(SMTP_PASSWORD,"",True)
+      MySession.Option = LoadPref(SMTP_OPTION,""+emailOptionDefault )
+      MySession.Port = LoadPref(SMTP_PORT,"25")
+      
+      RESULT MySession
+      
+     type : 458752
+   -
+     name : FormatDateTime
+     internal_properties : CAAAAAgAAACtPnZuv7SZo4nu5NiWQqCsD1Kbh2gw5Ek5oz55bXRzD5ZiqKBv+bHH02wgs/4xiV882WqTpZbyRxA869pZHHl0V8yhfxdiGE15Py/QekSuefdcPGpyn6UL6H9bhudFyaCq1Vf2/rJiuc6Te90kU3gVOqzDb0D0zc6klyEMw+RogWg/jizMCfvPCraOJV/06OeLXgbCILCe0JBprCnKYJyYlMfuIvZobY3TdXUmlkps2pfTADc=
+     procedure_id : 1510274990083767862
+     type_code : 15
+     code : |1-
+      // Summary: Formats a DateTime
+      // Syntax:
+      //[ <Result> = ] FormatDateTime (<dtDateTime> is datetime)
+      //
+      // Parameters:
+      //	dtDateTime (datetime): DateTime to format
+      // Return value:
+      // 	ANSI string: // 	None
+      //
+      PROCEDURE FormatDateTime(LOCAL dtDateTime is datetime)
+      
+       RESULT DateToString(dtDateTime..Date,"Mmmm DD YYYY - ") + TimeToString(dtDateTime..Time,"HH:MM")
+     type : 458752
+   -
+     name : Highlight
+     internal_properties : CAAAAAgAAACqxU9WQfxVqG1XqzZ6A0dA56VvB1L7OzEwXu1JWSbI2gSc9NiM5u4VHE28UTIxoxVHeOB6pMqpJHYvDFaWxDKOTQQN0TrkbhoD8Er14aI3/Tw+R3rVaRxPLuFHnD8d76rSVccq1BTEE5QVXdW65VprbpD/006WZWbMhxsOLUKeu5wiMbL8qN9mLRAPzGXSA42rZtZ2mjcne6+8ZUotBVeIpJwn0A==
+     procedure_id : 1510274990083833398
+     type_code : 15
+     code : |1+
+      
+      
+      // Summary: Highlights words in a text
+      // Syntax:
+      //[ <Result> = ] Highlight (<sText> is string, <arrWordsToHighlight> is array [, <bHTML> is boolean [, <nPosOnFirst> is int]])
+      //
+      // Parameters:
+      //	sText (ANSI string): Source text
+      //	arrWordsToHighlight (array): Words to highlight
+      //	bHTML (boolean - default value=0): True if the source text is in HTML, False otherwise
+      //	nPosOnFirst (integer - default value=0) : <specify the role of nPosOnFirst>
+      // Return value:
+      // 	ANSI string: Modified text in HTML with the highlighted words
+      //
+      PROCEDURE Highlight(LOCAL sText is string, arrWordsToHighlight is array of * strings, LOCAL bHTML is boolean = False, nPosHighFirst is int = 0) : string
+      
+      sTextHighlight 		is string
+      nPosition	  		is int
+      nPreviousPosition	is int
+      nSize				is int
+      nSubscript				is int
+      sBrushColor		is string
+      sTextColor		is string
+      cBrushColor		is a Color
+      bFirst			is boolean = True
+      
+      
+      // Reset
+      nPosHighFirst = 0
+      
+      // Don't process the empty strings
+      IF sText = "" THEN RESULT ""
+      
+      // HTML mode
+      IF bHTML THEN
+      	
+      	nPreviousPosition = 1
+      	nPosition = Position(sText, ">")
+      	WHILE nPosition > 0
+      		
+      		// Adds the ignored text
+      		sTextHighlight += sText[[nPreviousPosition TO nPosition]]
+      		
+      		nPreviousPosition = nPosition + 1
+      		nPosition = Position(sText, "<", nPreviousPosition)
+      		IF nPosition = 0 THEN 
+      			nPreviousPosition --
+      			BREAK
+      		END
+      		
+      		IF bFirst THEN
+      			nPosHighFirst = Length(sTextHighlight) + 1
+      			bFirst = False
+      		END
+      		
+      		// Highlights the text
+      		sTextHighlight += Highlight(HTMLToText(sText[[nPreviousPosition TO nPosition - 1]]), arrWordsToHighlight, False)
+      		
+      		// Next tag closing
+      		nPreviousPosition = nPosition
+      		nPosition = Position(sText, ">", nPreviousPosition + 1)
+      	END
+      	
+      	// Adds the ignored text
+      	sTextHighlight += sText[[nPreviousPosition TO]]
+      ELSE
+      	
+      	nPreviousPosition = 1
+      	nPosition = Position(sText, arrWordsToHighlight, 1, IgnoreCase + WholeWord)
+      	WHILE nPosition > 0
+      		
+      		// Adds the ignored text
+      		sTextHighlight += TextToHTML(sText[[nPreviousPosition TO nPosition - 1]])
+      		
+      		// Size of the word
+      		nSize = StringStartsWith(sText[[nPosition TO]], arrWordsToHighlight, ccIgnoreAccent + ccIgnoreCase)
+      		IF nSize > 0 THEN
+      			
+      			// Word found
+      			nSubscript = Seek(arrWordsToHighlight, asLinear + tccIgnoreAccent + tccIgnoreCase, sText[[nPosition on nSize]])
+      			IF nSubscript > 0 THEN
+      				
+      				// Background color
+      				cBrushColor	= GetColor(1 + nSubscript)
+      				cBrushColor..Luminance += 10
+      				sBrushColor 	= RGBToHTML(cBrushColor)
+      				
+      				// Color of the text 
+      				IF ColorLightness(cBrushColor) > 50 THEN
+      					// Dark
+      					cBrushColor = HSL(ColorHue(cBrushColor), ColorSaturation(cBrushColor), ColorLightness(cBrushColor) * 0.3)
+      				ELSE
+      					// Light
+      					cBrushColor = HSL(ColorHue(cBrushColor), ColorSaturation(cBrushColor), 95)
+      				END
+      				sTextColor	= RGBToHTML(cBrushColor)
+      				
+      				IF bFirst THEN
+      					nPosHighFirst = Length(sTextHighlight) + 1
+      					bFirst = False
+      					
+      					sTextHighlight += StringBuild([
+      						<span style="background-color: %1; color: %2" class="first">%3</span>
+      					], sBrushColor, sTextColor, TextToHTML(sText[[nPosition on nSize]]))
+      				ELSE
+      					sTextHighlight += StringBuild([
+      						<span style="background-color: %1; color: %2">%3</span>
+      					], sBrushColor, sTextColor, TextToHTML(sText[[nPosition on nSize]]))
+      				END
+      				
+      			ELSE
+      				sTextHighlight += TextToHTML(sText[[nPosition on nSize]])
+      			END
+      			
+      			nPreviousPosition = nPosition + nSize
+      		ELSE
+      			nPreviousPosition = nPosition
+      			nPosition += 1
+      		END
+      		
+      		IF nPosition + nSize > Length(sText) THEN BREAK
+      		nPosition = Position(sText, arrWordsToHighlight, nPosition + nSize, IgnoreCase + WholeWord)
+      	END
+      	
+      	// Adds the ignored text
+      	sTextHighlight += TextToHTML(sText[[nPreviousPosition TO]])
+      END
+      RESULT sTextHighlight
+      
+     type : 458752
+   -
+     name : ParseMessage
+     internal_properties : CAAAAAgAAABi5GQs7pVO/GownsWSo2P9vDoqfJ8R0M6CXt6TvinPrBkh8tN4xFJfDrLjOb8/hfEHx+9F07sUmScXYofhg2ii6OSTetmbfc3kNdJFuVFC5hcd4Jx0EZBurH/Ji07AlmpH8WcMV3kagfdubEvy+JI6ZqRyYFHpOWAiQZaik9dlTO3L6rRufMLVveTNmmkJO+OEXsxIvjzdC+0ToJybR4ZaF8zFWDtuoL3zeNr7ufs0Kne4304H6cgNVj6UYrs6iN88W8F7Y9f5GPxXBmewWNRYonmEJ+NCfRDL6kMUUYd9Pjdjf6a7LLJyG6prZs22xUEk/U5PkWXWiVckmiDx59ZHWIZVu9rI1vItGHkbluGVfGAbKKg0GT7MD9M6fAAOMfjOA/S137i3S5PR6JJbBTqRcfE=
+     procedure_id : 1510274990083898934
+     type_code : 15
+     code : |1+
+      // Summary: <specify the action of the procedure>
+      // Syntax:
+      //[ <Result> = ] ParseMessage (<sContent> is string)
+      //
+      // Parameters:
+      //	sContent (ANSI string): Text content to parse
+      // Return value:
+      // 	ANSI string: Full formatted message
+      //
+      PROCEDURE ParseMessage(sContents is string)
+      // Formatting
+      sParsedContent is string = sContents
+      
+      // EMOTICONS **********************************************************
+      sParsedContent = Replace(sParsedContent, "<_<", 		"<img src=""/" + FolderWeb() + "/images/smileys/dry.gif"" width=""20"" height=""20"" alt=""<_<"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":(", 		"<img src=""/" + FolderWeb() + "/images/smileys/sad.gif"" width=""20"" height=""20"" alt="":("" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":)", 		"<img src=""/" + FolderWeb() + "/images/smileys/smile.gif"" width=""20"" height=""20"" alt="":)"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":D", 		"<img src=""/" + FolderWeb() + "/images/smileys/biggrin.gif"" width=""20"" height=""20"" alt="":D"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":P", 		"<img src=""/" + FolderWeb() + "/images/smileys/tongue.gif"" width=""20"" height=""20"" alt="":P"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":angry:", 	"<img src=""/" + FolderWeb() + "/images/smileys/mad.gif"" width=""20"" height=""20"" alt="":angry:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":blink:", 		"<img src=""/" + FolderWeb() + "/images/smileys/blink.gif"" width=""20"" height=""20"" alt="":blink:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":huh:", 		"<img src=""/" + FolderWeb() + "/images/smileys/huh.gif"" width=""20"" height=""20"" alt="":huh:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":lol:", 		"<img src=""/" + FolderWeb() + "/images/smileys/laugh.gif"" width=""20"" height=""20"" alt="":lol:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":o", 		"<img src=""/" + FolderWeb() + "/images/smileys/ohmy.gif"" width=""20"" height=""20"" alt="":o"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":ph34r:", 	"<img src=""/" + FolderWeb() + "/images/smileys/ph34r.gif"" width=""20"" height=""20"" alt="":ph34r:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":rolleyes:", 	"<img src=""/" + FolderWeb() + "/images/smileys/rolleyes.gif"" width=""20"" height=""20"" alt="":rolleyes:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ":unsure:", 	"<img src=""/" + FolderWeb() + "/images/smileys/unsure.gif"" width=""20"" height=""20"" alt="":unsure:"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, ";)", 		"<img src=""/" + FolderWeb() + "/images/smileys/wink.gif"" width=""20"" height=""20"" alt="";)"" align=""absmiddle"">", WholeWord)
+      sParsedContent = Replace(sParsedContent, "B)", 		"<img src=""/" + FolderWeb() + "/images/smileys/cool.gif"" width=""20"" height=""20"" alt=""B)"" align=""absmiddle"">", WholeWord)
+      
+      RESULT sParsedContent
+      
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x139ee66f0035f674
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

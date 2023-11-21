@@ -1,0 +1,121 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : COL_Users
+ major_version : 28
+ minor_version : 0
+ type : 7
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x14f5931b092f81b0
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAAdC5DaGsntqmfkq1J4p6eipmeEO//QiIdypV0FB6KY+wiPKnW2KoJpaKmeXvb1NGpH4KGGthHXu/V4LqeilI4jnJwO5Q==
+  type_code : 31
+  p_codes : []
+  procedures :
+   -
+     name : EmailAvailable
+     internal_properties : CAAAAAgAAACs91BklxzGtVrzkSAlcI9q2uzpneX2uXWFg96myBJlYZm39XAe9pIB4s3Z7MhLaGu8/RG753EzvzNbWIWW/vyvFqCmRjlmI/X+nZO+jBjTYHMIUGMKlHhBzvA2I+ORY4ERHGAsiRFjO0sD1RRnC8yZnQhMmcY69K2Yqk4yhxXFO7a8
+     procedure_id : 1510274994380243376
+     type_code : 15
+     code : |1-
+      
+      // Summary: Checks the availability of an email address
+      // Syntax:
+      //[ <Result> = ] EmailAvailable (<sEmail> is string)
+      //
+      // Parameters:
+      //	sEmail (ANSI string): The address
+      // Return value:
+      // 	boolean: // 	None
+      //
+      // Example:
+      // Indicate an example.
+      //
+      PROCEDURE EmailAvailable(sEMail is string)
+      
+      HReadSeek(ForumUser,EmailAddress,sEMail,hIdentical)
+      
+      RESULT NOT HFound(ForumUser)
+     type : 458752
+   -
+     name : NicknameAvailable
+     internal_properties : CAAAAAgAAACs91BklxzGtVrzkSAlcI9q2uzpneX2uXWFg96myBJlYZm39XAe9pIB4s3Z7MhLaGu8/RG753EzvzNbWIWW/vyvFqCmRjlmI/X+nZO+jBjTYHMIUGMKlHhBzvA2I+ORY4ERHGAsiRFjO0sD1RRnC8yZnQhMmcY69K2Yqk4yhxXFO7a8
+     procedure_id : 1510274994380308912
+     type_code : 15
+     code : |1-
+      
+      // Summary: Checks the availability of a nickname
+      // Syntax:
+      //[ <Result> = ] NicknameAvailable (<sNickname> is string)
+      //
+      // Parameters:
+      //	sNickname (ANSI string): The nickname
+      // Return value:
+      // 	boolean: // 	None
+      //
+      // Example:
+      // Indicate an example.
+      //
+      PROCEDURE NicknameAvailable(sPseudo is string)
+      
+      HReadSeek(ForumUser,Pseudo,sPseudo,hIdentical)
+      
+      RESULT NOT HFound(ForumUser)
+     type : 458752
+   -
+     name : UploadPath
+     internal_properties : CAAAAAgAAACs91BklxzGtVrzkSAlcI9q2uzpneX2uXWFg96myBJlYZm39XAe9pIB4s3Z7MhLaGu8/RG753EzvzNbWIWW/vyvFqCmRjlmI/X+nZO+jBjTYHMIUGMKlHhBzvA2I+ORY4ERHGAsiRFjO0sD1RRnC8yZnQhMmcY69K2Yqk4yhxXFO7a8
+     procedure_id : 1510274994380374448
+     type_code : 15
+     code : |1-
+      // Summary: Gives the path of the avatar
+      //[ <Result> = ] PathServerAvatar (<sAvatar> is string)
+      //
+      // Parameters:
+      //	sAvatar (ANSI string): The file
+      //	bBrowser (boolean): True to get the browser path, False to get the physical path
+      
+      PROCEDURE UploadPath(sAvatar is string, bBrowser is boolean)
+      
+      IF bBrowser THEN
+      	RESULT "../" + gsDirBrowserUploads + ["/"] + sAvatar
+      ELSE
+      	RESULT gsUploadDir + [fSep] + sAvatar
+      END
+     type : 458752
+   -
+     name : EncryptPWD
+     procedure_id : 1510274994380439984
+     type_code : 15
+     code : |1-
+      // Summary: Encrypts a user password
+      //
+      PROCEDURE EncryptPWD(sPassword is string)
+      
+      RESULT Crypt(sPassword,COL_Preferences.gsEncryptionPassword,compressNone,encodeBASE64)
+     type : 458752
+   -
+     name : DecryptPWD
+     procedure_id : 1510274994380505520
+     type_code : 15
+     code : |1-
+      // Summary: Encrypts a user password
+      //
+      PROCEDURE DecryptPWD(sPassword is string)
+      
+      RESULT Uncrypt(sPassword,COL_Preferences.gsEncryptionPassword,compressNone,encodeBASE64)
+     type : 458752
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : COL_SansNom1
+resources :
+ string_res :
+  identifier : 0x1464b6db0048f0d0
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ

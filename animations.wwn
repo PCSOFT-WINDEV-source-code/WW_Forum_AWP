@@ -1,0 +1,165 @@
+#To edit and compare internal_properties, use WINDEV integrated tools.
+#Internal properties refer to the properties of controls in windows, reports, etc.
+info :
+ name : animations
+ major_version : 28
+ minor_version : 0
+ type : 65539
+ description : ""
+ subtype : 0
+procedure_set :
+ identifier : 0x139af3bd0053a6f0
+ internal_properties : CAAAAAgAAABGLu41kG7fjQV3iS4F72qmnKaNh5694reolNKIW0iw
+ code_elements :
+  internal_properties : CAAAAAgAAAAQF3uzNP8wxRinXgd9ZJhj+T5fzlAZU57PgOU17xoYm4CHzjEqvi5drHXwZtQXZCoJcuOWwI9Lb5n8gHdgzunrRrQb6A==
+  type_code : 41
+  p_codes :
+   -
+     internal_properties : CAAAAAgAAAD5O+wn30y1FpFqh8hkb55fOct+DPZ3NxOxmJN+yAWJgbtuYMC9Wh2hMol/9tTqs5yJPMi0pmpN8Qk4o9Spt0Pftr7PMqIPDwHTzX1Lt3FlbVzmX2YbwoFwYwOQa2gAQKu6ZjrA/3243JIkxZ4=
+     code : |1+
+      
+      
+      // List of animations
+      
+      
+      bounce is string = "bounce"
+      flash is string = "flash"
+      pulse is string = "pulse"
+      rubberBand  is string = "rubberBand"
+      shake  is string = "shake"
+      swing  is string = "swing"
+      tada  is string = "tada"
+      wobble  is string = "wobble"
+      // bounce entrances
+      bounceIn  is string = "bounceIn"
+      bounceInDown  is string = "bounceInDown"
+      bounceInLeft  is string = "bounceInLeft"
+      bounceInRight  is string = "bounceInRight"
+      bounceInUp  is string = "bounceInUp"
+      // bounce exits
+      bounceOut  is string = "bounceOut"
+      bounceOutDown  is string = "bounceOutDown"
+      bounceOutLeft  is string = "bounceOutLeft"
+      bounceOutRight  is string = "bounceOutRight"
+      bounceOutUp  is string = "bounceOutUp"
+      // fade entrances
+      fadeIn  is string = "fadeIn"
+      fadeInDown  is string = "fadeInDown"
+      fadeInDownBig  is string = "fadeInDownBig"
+      fadeInLeft  is string = "fadeInLeft"
+      fadeInLeftBig  is string = "fadeInLeftBig"
+      fadeInRight  is string = "fadeInRight"
+      fadeInRightBig  is string = "fadeInRightBig"
+      fadeInUp  is string = "fadeInUp"
+      fadeInUpBig  is string = "fadeInUpBig"
+      // fade exits
+      fadeOut  is string = "fadeOut"
+      fadeOutDown  is string = "fadeOutDown"
+      fadeOutDownBig  is string = "fadeOutDownBig"
+      fadeOutLeft  is string = "fadeOutLeft"
+      fadeOutLeftBig  is string = "fadeOutLeftBig"
+      fadeOutRight  is string = "fadeOutRight"
+      fadeOutRightBig  is string = "fadeOutRightBig"
+      fadeOutUp  is string = "fadeOutUp"
+      fadeOutUpBig  is string = "fadeOutUpBig"
+      // flippers
+      flip  is string = "flip"
+      flipInX  is string = "flipInX"
+      flipInY  is string = "flipInY"
+      flipOutX  is string = "flipOutX"
+      flipOutY  is string = "flipOutY"
+      // Lightspeed
+      lightSpeedIn  is string = "lightSpeedIn"
+      lightSpeedOut  is string = "lightSpeedOut"
+      // Rotating entrances
+      rotateIn  is string = "rotateIn"
+      rotateInDownLeft  is string = "rotateInDownLeft"
+      rotateInDownRight  is string = "rotateInDownRight"
+      rotateInUpLeft  is string = "rotateInUpLeft"
+      rotateInUpRight  is string = "rotateInUpRight"
+      // Rotating exits
+      rotateOut  is string = "rotateOut"
+      rotateOutDownLeft  is string = "rotateOutDownLeft"
+      rotateOutDownRight  is string = "rotateOutDownRight"
+      rotateOutUpLeft  is string = "rotateOutUpLeft"
+      rotateOutUpRight  is string = "rotateOutUpRight"
+      // Sliders
+      slideInDown  is string = "slideInDown"
+      slideInLeft  is string = "slideInLeft"
+      slideInRight  is string = "slideInRight"
+      slideOutLeft  is string = "slideOutLeft"
+      slideOutRight  is string = "slideOutRight"
+      slideOutUp  is string = "slideOutUp"
+      // Specials
+      hinge  is string = "hinge"
+      rollIn  is string = "rollIn"
+      rollOut  is string = "rollOut"
+      
+     type : 983040
+     role : N
+   -
+     type : 983042
+     role : N
+  procedures :
+   -
+     name : Animates
+     internal_properties : CAAAAAgAAAD6L284L33yXq+zXpIg6uqtkMrIlocVWYMvTiSDwPVzfynA/OAw941OIC8nLDw6JaYKTeOJUIJEyqDRRCPz3rZMjuWSOP2W
+     procedure_id : 1412709426213988080
+     type_code : 15
+     code : |1-
+      
+      // Animates a control
+      function Animates(sControl,sAnimation){
+      
+      	sControl = '#' + sControl;
+      	
+      	$(sControl).addClass('animated');
+      	
+      	
+      	if ($(sControl).hasClass(sAnimation)) {
+      		$(sControl).removeClass(sAnimation);
+      		
+      		setTimeout(function(){
+      			$(sControl).addClass(sAnimation);
+      		},1);
+      	}
+      	else{
+      		$(sControl).addClass(sAnimation);
+      	}
+      
+      	
+      }
+     language : JS
+     type : 458752
+     role : N
+   -
+     name : StopAnimation
+     internal_properties : CAAAAAgAAADycltkHvQg6/h6ALG6E99dHBrkX8QOJXKj1OwnV9qRaK0wwRFboyXdfJzwrXK4i18uNK8U6fp98psLdhFiYbq1wUG0wRR+2Q==
+     procedure_id : 1413862079502022653
+     type_code : 15
+     code : |1+
+      
+      // Summary: Stops an animation
+      // 
+      function StopAnimation(sControl,sAnimation){
+      	
+      	sControl = '#' + sControl;
+      	
+      	if ($(sControl).hasClass(sAnimation)) {
+      		$(sControl).removeClass(sAnimation);
+      	}
+      }
+     language : JS
+     type : 458752
+     role : N
+  procedure_templates : []
+  property_templates : []
+ code_parameters :
+  internal_properties : CAAAAAgAAACVGQgYbalU7DKC3oH4ItDrjtcTHXXV/EuH8q0IbhyQlw==
+  original_name : NAV_SansNom1
+resources :
+ string_res :
+  identifier : 0x139ab67e004f6940
+  internal_properties : CAAAAAgAAACm76HWfKGWp33VjXInA4cRlqArlgTTA862QGt72W2ld5Y=
+custom_note :
+ internal_properties : CAAAAAgAAABtB9HWVzrXO2+4NDRVK0vmzaNKrCKqH1DBX30lMmGZ
